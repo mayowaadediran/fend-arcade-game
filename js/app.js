@@ -25,7 +25,9 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function() {
-  this.sprite = 'images/char-boy'
+  this.x = 0;
+  this.y = 0;
+  this.sprite = 'images/char-boy.png';
 }
 
 Player.prototype.update = function (dt) {
