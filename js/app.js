@@ -20,7 +20,7 @@ Enemy.prototype.update = function(dt) {
       this.x += 200 * this.speed * dt;
     }
     else {
-      this.x = 0;
+      this.x = -100;
     }
 };
 
@@ -60,6 +60,11 @@ Player.prototype.handleInput = function (keyPressed) {
     this.y += 80
   }
 
+}
+
+Player.prototype.resetPlayer = function () {
+  this.x = 200;
+  this.y = 405;
 }
 
 // Now instantiate your objects.
