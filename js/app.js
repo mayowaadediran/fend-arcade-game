@@ -5,6 +5,7 @@ var Enemy = function(x , y, speed) {
     this.x = x;
     this.y = y;
     this.speed = speed;
+    //randomly assign speed 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
@@ -21,6 +22,10 @@ Enemy.prototype.update = function(dt) {
     }
     else {
       this.x = -100;
+    }
+
+    if (this.x === player.x && this.y === player.y) {
+      player.resetPlayer();
     }
 };
 
@@ -39,7 +44,10 @@ var Player = function(x, y) {
 }
 
 Player.prototype.update = function (dt) {
-  
+  if (this.y < 50) {
+    this.resetPlayer();
+  }
+
 }
 
 Player.prototype.render = function () {
@@ -51,13 +59,13 @@ Player.prototype.handleInput = function (keyPressed) {
     this.x -= 100;
   }
   else if (keyPressed === 'up' && this.y > 18) {
-    this.y -= 80;
+    this.y -= 83;
   }
   else if (keyPressed === 'right' && this.x < 400) {
-    this.x += 100
+    this.x += 100;
   }
   else if (keyPressed === 'down' && this.y < 380) {
-    this.y += 80
+    this.y += 83;
   }
 
 }
@@ -72,10 +80,10 @@ Player.prototype.resetPlayer = function () {
 // Place the player object in a variable called player
 const player = new Player(200, 405);
 
-let enemy1 = new Enemy (0, 0, 1);
+let enemy1 = new Enemy (0, 60, 1);
 let enemy2 = new Enemy (-4, 60, 2);
-let enemy3 = new Enemy (-8, 190, 1.5)
-const allEnemies = [];
+let enemy3 = new Enemy (-8, 140, 1.5)
+let allEnemies = [];
 allEnemies.push(enemy1, enemy2, enemy3);
 
 
