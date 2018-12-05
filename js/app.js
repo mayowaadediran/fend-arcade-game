@@ -24,9 +24,7 @@ Enemy.prototype.update = function(dt) {
       this.x = -100;
     }
 
-    if (this.x === player.x && this.y === player.y) {
-      player.resetPlayer();
-    }
+
 };
 
 // Draw the enemy on the screen, required method for game
@@ -78,11 +76,11 @@ Player.prototype.resetPlayer = function () {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const player = new Player(200, 405);
+let player = new Player(200, 405);
 
 let enemy1 = new Enemy (0, 60, 1);
 let enemy2 = new Enemy (-4, 60, 2);
-let enemy3 = new Enemy (-8, 140, 1.5)
+let enemy3 = new Enemy (-8, 140, 1.5);
 let allEnemies = [];
 allEnemies.push(enemy1, enemy2, enemy3);
 
