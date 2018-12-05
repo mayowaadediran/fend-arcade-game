@@ -78,11 +78,8 @@ Player.prototype.resetPlayer = function () {
 // Place the player object in a variable called player
 let player = new Player(200, 405);
 
-let enemy1 = new Enemy (0, 60, 1);
-let enemy2 = new Enemy (-4, 60, 2);
-let enemy3 = new Enemy (-8, 140, 1.5);
-let allEnemies = [];
-allEnemies.push(enemy1, enemy2, enemy3);
+
+let allEnemies = [new Enemy(0, 60, 1), new Enemy(-4, 60, 2), new Enemy(-8, 140, 1.5)];
 
 
 // This listens for key presses and sends the keys to your
