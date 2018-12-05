@@ -24,6 +24,12 @@ Enemy.prototype.update = function(dt) {
       this.x = -100;
     }
 
+  for (let enemy of allEnemies) {
+    if (this.y === player.y && this.x + 40 >= player.x && this.x - 40 <= player.x) {
+      player.resetPlayer();
+    }
+  }
+	
 
 };
 
@@ -46,6 +52,7 @@ Player.prototype.update = function (dt) {
     this.resetPlayer();
   }
 
+  
 }
 
 Player.prototype.render = function () {
@@ -79,7 +86,7 @@ Player.prototype.resetPlayer = function () {
 let player = new Player(200, 405);
 
 
-let allEnemies = [new Enemy(0, 60, 1), new Enemy(-4, 60, 2), new Enemy(-8, 140, 1.5)];
+let allEnemies = [new Enemy(0, 73, 1), new Enemy(-4, 73, 2), new Enemy(-8, 156, 1.5), new Enemy(-6, 239, 1.6)];
 
 
 // This listens for key presses and sends the keys to your
