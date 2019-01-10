@@ -6,7 +6,9 @@ function startGame() {
   overlay.classList.add("hide");
 }
 
-
+//keyBlock class to hold the keys to be unlocked
+//rendering lives 
+//How will the lives reduce - when the player hits 
 class Enemy  {
   constructor(x, y, speed) {
   this.x = x;
@@ -26,6 +28,7 @@ class Enemy  {
     for (let enemy of allEnemies) {
       if (this.y === player.y && this.x + 40 >= player.x && this.x - 40 <= player.x) {
         player.resetPlayer();
+        allLives.pop();
       }
     }
   }
@@ -73,6 +76,18 @@ class Player {
   }
 }
 
+class Lives {
+  constructor (x, y) {
+    this.x = x;
+    this.y = y; 
+    this.sprite = 'images/Heart.png'
+  }
+
+  render() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y, 28, 42);
+  }
+}
+
 // Now instantiate your objects.
 
 // Place the player object in a variable called player
@@ -81,6 +96,7 @@ let player = new Player(200, 405);
 // Place all enemy objects in an array called allEnemies
 let allEnemies = [new Enemy(0, 73, 1), new Enemy(-4, 73, 2), new Enemy(-8, 156, 1.5), new Enemy(-6, 239, 1.6)];
 
+let allLives = [new Lives(400, 505), new Lives(430, 505), new Lives(460, 505)];
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
