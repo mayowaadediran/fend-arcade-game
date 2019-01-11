@@ -1,4 +1,6 @@
 let welcomeModal = document.getElementById('welcome-modal');
+let winModal = document.getElementById('win-modal');
+let loseModal = document.getElementById('lose-modal');
 let overlay = document.querySelector(".overlay")
 
 function startGame() {
@@ -6,6 +8,14 @@ function startGame() {
   overlay.classList.add("hide");
 }
 
+function loseGame() {
+  loseModal.style.display = "flex";
+  overlay.classList.remove("hide");
+}
+
+function resetGame() {
+  window.location.reload();
+}
 //keyBlock class to hold the keys to be unlocked
 //rendering lives 
 //How will the lives reduce - when the player hits 
@@ -30,6 +40,10 @@ class Enemy  {
         player.resetPlayer();
         allLives.pop();
       }
+    }
+
+    if (allLives.length === 0) {
+      loseGame();
     }
   }
 
