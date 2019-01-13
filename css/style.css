@@ -45,8 +45,8 @@ body {
   border-radius: 20px;
 }
 
-#welcome-modal h2,
-#welcome-modal p {
+.overlay h2,
+.overlay p {
   font-family: 'Roboto', sans-serif;
   color: #f9f8e5;
 }
@@ -65,11 +65,11 @@ button {
   cursor: pointer;
 }
 
-#welcome-modal button:hover {
+button:hover {
   background-color: #f40004a8;
 }
 
-#welcome-modal button:focus {
+button:focus {
   outline: none;
 }
 
