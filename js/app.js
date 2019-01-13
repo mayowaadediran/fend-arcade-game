@@ -3,31 +3,41 @@ let winModal = document.getElementById('win-modal');
 let loseModal = document.getElementById('lose-modal');
 let overlay = document.querySelector(".overlay")
 
+/**
+ * Remove modal to begin playing
+ */
 function startGame() {
   welcomeModal.style.display = "none";
   overlay.classList.add("hide");
 }
 
+/**
+ * Creates modal when game is lost
+ */
 function loseGame() {
   loseModal.style.display = "flex";
   overlay.classList.remove("hide");
 }
 
+/**
+ * Creates modal when game is won
+ */
 function winGame() {
   winModal.style.display = "flex";
   overlay.classList.remove("hide");
 }
 
+/**
+ * Reload window 
+ */
 function resetGame() {
   window.location.reload();
 }
 
-//unlocking gems....
-//place gems in the water blocks so that when a player hits the block he unlocks
-//the gems...gems can give extra lives and stones will reduce lives 
-//keyBlock class to hold the keys to be unlocked
-//rendering lives 
-//How will the lives reduce - when the player hits 
+/**
+ * Creates enemy class
+ * @class
+ */
 class Enemy  {
   constructor(x, y, speed) {
   this.x = x;
@@ -36,7 +46,14 @@ class Enemy  {
   this.sprite = 'images/enemy-bug.png'
   }
 
+  /**
+   * Update enemy
+   * @param {string} dt Time function
+   */
+
   update(dt) {
+
+    //Set enemy movement within blocks
     if (this.x < 505) {
       this.x += 200 * this.speed * dt;
     }
@@ -44,6 +61,7 @@ class Enemy  {
       this.x = -100;
     }
 
+    //Detect enemy and player collision
     for (let enemy of allEnemies) {
       if (this.y === player.y && this.x + 40 >= player.x && this.x - 40 <= player.x) {
         player.resetPlayer();
@@ -51,16 +69,21 @@ class Enemy  {
       }
     }
 
+    //Check live to detect lost game
     if (allLives.length === 0) {
       loseGame();
     }
   }
 
+  //Render enemy bugs to game blocks 
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 };
 
+/**
+ * Creates player class
+ */
 class Player {
   constructor(x, y) {
     this.x = x;
@@ -68,21 +91,27 @@ class Player {
     this.sprite = 'images/char-boy.png'
   }
 
- 
+  /**
+  * Update Player
+  * @param {string} dt Time function
+  */
   update(dt) {
+
+    //Detect player and key collision 
     for (let key of allKeys) {
       if (key.y - 30 === player.y && key.x - 20 === player.x) {
         player.resetPlayer();
         var keyIndex = allKeys.indexOf(key);
-        allKeys.splice(keyIndex, 1);
-        
+        allKeys.splice(keyIndex, 1); 
       }
     }
 
+    //Logic to check if all keys are collected
     if (allKeys.length === 0) {
       winGame();
     }
 
+    //Reset player when on water blocks
     if (player.y < 5) {
       player.resetPlayer();
     }
@@ -92,6 +121,10 @@ class Player {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 
+  /**
+   * Handle keyboard inputs to move player
+   * @param {string} keyPressed Keyboard arrow keys
+   */
   handleInput(keyPressed) {
     if (keyPressed === 'left' && this.x > 33) {
       this.x -= 100;
@@ -107,11 +140,19 @@ class Player {
     }
   }
 
+  /**
+   * Reset player to starting position
+   */
   resetPlayer() {
     this.x = 200;
     this.y = 405;
   }
 }
+
+/**
+ * Creates a new Lives 
+ * @class
+ */
 
 class Lives {
   constructor (x, y) {
@@ -125,6 +166,9 @@ class Lives {
   }
 }
 
+/**
+ * Creates a new Key 
+ */
 class Key {
   constructor(x, y) {
     this.x = x;
@@ -137,7 +181,7 @@ class Key {
   }
 }
 
-// Now instantiate your objects.
+// Instantiate Objects 
 
 // Place the player object in a variable called player
 let player = new Player(200, 405);
@@ -145,8 +189,10 @@ let player = new Player(200, 405);
 // Place all enemy objects in an array called allEnemies
 let allEnemies = [new Enemy(0, 73, 1), new Enemy(-4, 73, 2), new Enemy(-8, 156, 1.5), new Enemy(-6, 239, 1.6)];
 
+// Array to hold lives Object
 let allLives = [new Lives(400, 505), new Lives(430, 505), new Lives(460, 505)]; 
 
+//Array to hold Key objects
 let allKeys = [new Key(20, 20), new Key(120, 20), new Key(220, 20), new Key(320, 20), new Key(420, 20) ]
 
 // This listens for key presses and sends the keys to your
