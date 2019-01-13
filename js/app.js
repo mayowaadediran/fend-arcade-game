@@ -13,6 +13,11 @@ function loseGame() {
   overlay.classList.remove("hide");
 }
 
+function winGame() {
+  winModal.style.display = "flex";
+  overlay.classList.remove("hide");
+}
+
 function resetGame() {
   window.location.reload();
 }
@@ -65,8 +70,17 @@ class Player {
 
  
   update(dt) {
-    if (this.y < 0) {
-      this.resetPlayer();
+    for (let key of allKeys) {
+      if (key.y - 30 === player.y && key.x >= player.x) {
+        player.resetPlayer();
+        var keyIndex = allKeys.indexOf(key);
+        allKeys.splice(keyIndex, 1);
+        
+      }
+    }
+
+    if (allKeys.length === 0) {
+      winGame();
     }
   }
 
